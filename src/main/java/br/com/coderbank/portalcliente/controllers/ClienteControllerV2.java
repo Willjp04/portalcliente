@@ -38,9 +38,22 @@ public class ClienteControllerV2 {
 
         var cliente = clienteRepository.findById(id).orElse(null);
 
-        return cliente != null ? ResponseEntity.ok(Collections.singletonList(cliente)) : ResponseEntity.notFound().build();
+        if (cliente != null) {
+            return ResponseEntity.ok(Collections.singletonList(cliente));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
+    @PutMapping("/{id}")
+
+    public ResponseEntity<Cliente> atualizar(@PathVariable(value = "id") UUID id, @RequestBody Cliente cliente) {
+
+        var clienteOptional = clienteRepository.findById(id);
+        return clienteOptional
+                .map(c -> ResponseEntity.ok
+                        (clienteRepository.save(cliente))).orElseGet(() -> ResponseEntity.notFound().build());
 
 
+    }
 }
