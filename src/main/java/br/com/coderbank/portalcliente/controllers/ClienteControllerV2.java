@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v2/clientes")
@@ -29,6 +31,14 @@ public class ClienteControllerV2 {
     @GetMapping
     public ResponseEntity<List<Cliente>> listar() {
         return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Cliente>> buscarPorId(@PathVariable UUID id) {
+
+        var cliente = clienteRepository.findById(id).orElse(null);
+
+        return cliente != null ? ResponseEntity.ok(Collections.singletonList(cliente)) : ResponseEntity.notFound().build();
     }
 
 
