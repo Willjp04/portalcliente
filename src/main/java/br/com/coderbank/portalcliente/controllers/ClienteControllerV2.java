@@ -53,7 +53,11 @@ public class ClienteControllerV2 {
         return clienteOptional
                 .map(c -> ResponseEntity.ok
                         (clienteRepository.save(cliente))).orElseGet(() -> ResponseEntity.notFound().build());
-
-
     }
-}
+
+        @DeleteMapping("/{id}")
+                public ResponseEntity<Void> remover(@PathVariable UUID id){
+            clienteRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+    }
