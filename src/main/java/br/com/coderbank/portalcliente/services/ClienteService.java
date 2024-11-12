@@ -53,7 +53,7 @@ public class ClienteService {
     }
 
 
-    public List<Cliente> listar() {
+    public List<Cliente> listarTodosClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
         return clientes;
 

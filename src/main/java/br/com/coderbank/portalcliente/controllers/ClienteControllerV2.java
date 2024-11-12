@@ -30,8 +30,9 @@ public class ClienteControllerV2 {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> listar() {
-        return ResponseEntity.status(HttpStatus.OK).body(clienteService.listar());
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.listarTodosClientes());
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Cliente>> buscarPorId(@PathVariable UUID id) {
