@@ -10,6 +10,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ClienteService {
 
@@ -21,6 +26,8 @@ public class ClienteService {
         verificarCpfDuplicado(clienteRequestDTO);
 
         var clienteEntity = new Cliente();
+
+
 
         BeanUtils.copyProperties(clienteRequestDTO, clienteEntity);
         clienteEntity.setStatus(Status.ATIVO);
@@ -44,6 +51,16 @@ public class ClienteService {
             throw new ClienteJaExistenteException("Cliente com cpf " + numeroCpf + " já existe" );
         }
     }
+
+
+    public List<Cliente> listar() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes;
+
+    }
+
+
+
 
 
 }

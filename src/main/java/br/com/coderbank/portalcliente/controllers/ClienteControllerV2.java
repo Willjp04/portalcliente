@@ -24,13 +24,13 @@ public class ClienteControllerV2 {
     private ClienteRepository clienteRepository;
 
     @PostMapping
-    public ResponseEntity<ClienteResponseDTO> salvar (@RequestBody ClienteRequestDTO clienteRequestDTO) {
+    public ResponseEntity<ClienteResponseDTO> salvar(@RequestBody ClienteRequestDTO clienteRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.salvar(clienteRequestDTO));
     }
 
     @GetMapping
     public ResponseEntity<List<Cliente>> listar() {
-        return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.listar());
     }
 
     @GetMapping("/{id}")
